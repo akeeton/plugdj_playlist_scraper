@@ -1,6 +1,5 @@
 (function(){
 
-    injectJqueryUi();
     injectJqueryAndRun();
 
 
@@ -26,38 +25,9 @@
     }
 
     
-    function injectJqueryUi() {
-        var script = document.createElement("script");
-		script.src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js";
-		document.getElementsByTagName("head")[0].appendChild(script);
-
-		var styleLink = document.createElement("link");
-		styleLink.rel = "stylesheet";
-        styleLink.href = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css";
-
-        document.getElementsByTagName("head")[0].appendChild(styleLink);
-    }
-
-
-    //function injectDialog() {
-    //    var dialog = $('<div/>', {
-    //        class: 'dialog',
-    //        title: 'Playlist scrape results'
-    //    });
-
-    //    dialog.appendTo($(document.body));
-    //    dialog.dialog();
-    //}
-	
-                        //#frame iframe { display: none; position: fixed; top: 10%; left: 10%; width: 80%; height: 80%; z-index: 999; border: 10px solid rgba(0,0,0,.5); margin: -5px 0 0 -5px; }
-					//<iframe src='http://en.wikipedia.org/w/index.php?&search="+s+"' onload="$('#frame iframe').slideDown(500);">Enable iFrames.</iframe>
-
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
 		    alert("initMyBookmarklet() 1");
-
-		    //injectDialog();
-		    //$("#dialog").html(($(".author")));
 
 		    $("body").append(`
 				<div id='scraped_playlists_window'>
