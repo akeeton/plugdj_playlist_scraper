@@ -22,6 +22,7 @@
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
 			alert("initMyBookmarklet()");
+		}
 	}
 
 })();
