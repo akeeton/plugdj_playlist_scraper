@@ -22,6 +22,8 @@
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
 		    alert("initMyBookmarklet() 1");
+
+		    alert($(".author").text());
 		})();
 	}
 
