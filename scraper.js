@@ -29,10 +29,22 @@
 		(window.myBookmarklet = function() {
 		    // alert("initMyBookmarklet() 1");
 
+		    var playlist = "";
+
+		    $("#playlist-panel .author").each(function (index, author) {
+		        playlist += $(author).text() + "\n";
+		    });
+
+		    $("#playlist-panel .title").each(function (index, title) {
+		        playlist += $(title).text() + "\n";
+		    });
+
+		    playlist += "\n";
+
 		    $("body").append(`
 				<div id='scraped_playlists_window'>
 					<div id='scraped_playlists' style=''>
-                        <textarea name="scraped_playlists_textarea" rows="20" cols="50">` + $(".author").text() + `</textarea>
+                        <textarea name="scraped_playlists_textarea" rows="20" cols="50">` + playlist + `</textarea>
 					</div>
 					<style type='text/css'>
                         #scraped_playlists { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255); cursor: pointer; z-index: 900; }
