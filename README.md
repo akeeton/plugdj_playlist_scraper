@@ -5,10 +5,10 @@
 
 ## Usage
 
-- Drag the bookmarklet to your bookmark toolbar.  Alternatively, create a new bookmark with any name and paste the code into the "Location" box.
-- Visit a room on https://plug.dj (for example, https://plug.dj/mashupfm).
-- Activate the playlist that you want to scrape.
-- Click the bookmarklet to run the code.
-- A textarea with the text (JSON) version of the active playlist should pop up.  Copy it to a safe place.
-- Refresh the page to continue using the site.
-- Repeat for each of your playlists.
+1. Drag the bookmarklet to your bookmark toolbar.  Alternatively, create a new bookmark with any name and paste the code into the "Location" box.
+1. Visit a room on https://plug.dj (for example, https://plug.dj/mashupfm).
+1. Activate the playlist that you want to scrape.
+1. Click the bookmarklet to run the code.
+1. A textarea with the text (JSON) version of the active playlist should pop up.  Copy it to a safe place.
+1. Refresh the page to continue using the site.
+1. Repeat for each of your playlists.
