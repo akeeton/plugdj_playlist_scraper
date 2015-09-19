@@ -27,16 +27,16 @@
     
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
-		    alert("initMyBookmarklet() 1");
+		    // alert("initMyBookmarklet() 1");
 
 		    $("body").append(`
 				<div id='scraped_playlists_window'>
 					<div id='scraped_playlists' style=''>
-						<p>Container</p>
+                        <textarea name="scraped_playlists_textarea" rows="20" cols="50">` + $(".author").text() + `</textarea>
 					</div>
 					<style type='text/css'>
                         #scraped_playlists { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255); cursor: pointer; z-index: 900; }
-                        #scraped_playlists p { color: black; font: normal normal bold 20px/20px Helvetica, sans-serif; position: absolute; top: 50%; left: 50%; width: 10em; margin: -10px auto 0 -5em; text-align: center; }
+                        #scraped_playlists textarea { color: black; sans-serif; position: absolute; top: 10%; left: 10%; text-align: center; }
 					</style>
 				</div>`
             );
