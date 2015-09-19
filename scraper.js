@@ -21,8 +21,8 @@
 	
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
-			alert("initMyBookmarklet()");
-		}
+		    alert("initMyBookmarklet() 1");
+		})();
 	}
 
 })();
