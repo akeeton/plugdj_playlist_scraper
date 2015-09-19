@@ -1,4 +1,4 @@
-(function(){
+(function () {
 
     injectJqueryAndRun();
 
@@ -12,7 +12,7 @@
             var done = false;
             var script = document.createElement("script");
             script.src = "http://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
-            script.onload = script.onreadystatechange = function(){
+            script.onload = script.onreadystatechange = function () {
                 if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
                     done = true;
                     initMyBookmarklet();
@@ -31,41 +31,55 @@
         });
     }
 
-    
-	function initMyBookmarklet() {
-		(window.myBookmarklet = function() {
-		    // alert("initMyBookmarklet() 1");
 
-		    var authors = [];
+    function initMyBookmarklet() {
+        (window.myBookmarklet = function () {
+            // alert("initMyBookmarklet() 1");
 
-		    $("#playlist-panel .container .author").each(function (index, author) {
-		        authors.push($(author).text());
-		    });
+            var authors = [];
+            $("#playlist-panel .container .author").each(function (index, author) {
+                authors.push($(author).text());
+            });
 
-		    var titles = [];
-		    $("#playlist-panel .container .title").each(function (index, title) {
-		        titles.push($(title).text());
-		    });
+            var titles = [];
+            $("#playlist-panel .container .title").each(function (index, title) {
+                titles.push($(title).text());
+            });
 
-		    var playlist = [];
+            var imageUrls = [];
+            $("#playlist-panel .playlist-media-first-item img, #playlist-panel .playlist-media-item img").each(function (index, image) {
+                imageUrls.push(image.src);
+            })
 
-		    var authorsAndTitles = zip([authors, titles]);
-		    for (var i = 0; i < authorsAndTitles.length; i++) {
-		        var author = authorsAndTitles[i][0];
-		        var title = authorsAndTitles[i][1];
+            var ids = [];
+            for (var i = 0; i < imageUrls.length; i++) {
+                var regex = /https:\/\/i.ytimg.com\/vi\/(.+)\/default.jpg/;
+                var matches = imageUrls[i].match(regex);
 
-		        var playlistEntry = {
-		            "author": author,
-		            "title": title,
-		            "url": ""
-		        };
+                var id = (matches == null) ? "" : matches[1];
+                ids.push(id);
+            }
 
-		        playlist.push(playlistEntry);
-		    }
+            var playlist = [];
 
-		    var playlistJson = JSON.stringify({ playlist }, null, 4);
+            var zippedPlaylistEntries = zip([authors, titles, ids]);
+            for (var i = 0; i < zippedPlaylistEntries.length; i++) {
+                var author = zippedPlaylistEntries[i][0];
+                var title = zippedPlaylistEntries[i][1];
+                var id = zippedPlaylistEntries[i][2];
 
-		    $("body").append(`
+                var playlistEntry = {
+                    "author": author,
+                    "title": title,
+                    "id": id
+                };
+
+                playlist.push(playlistEntry);
+            }
+
+            var playlistJson = JSON.stringify({ playlist }, null, 4);
+
+            $("body").append(`
 				<div id='scraped_playlists_window'>
 					<div id='scraped_playlists' style=''>
                         <textarea name="scraped_playlists_textarea" rows="20" cols="50">` + playlistJson + `</textarea>
@@ -77,8 +91,8 @@
 				</div>`
             );
 
-		    $("#scraped_playlists").fadeIn(750);
-		})();
-	}
+            $("#scraped_playlists").fadeIn(750);
+        })();
+    }
 })();
 
