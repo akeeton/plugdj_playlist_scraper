@@ -24,31 +24,55 @@
         }
     }
 
+
+    function zip(arrays) {
+        return arrays[0].map(function (_, i) {
+            return arrays.map(function (array) { return array[i] })
+        });
+    }
+
     
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
 		    // alert("initMyBookmarklet() 1");
 
-		    var playlist = "";
+		    var authors = [];
 
-		    $("#playlist-panel .author").each(function (index, author) {
-		        playlist += $(author).text() + "\n";
+		    $("#playlist-panel .container .author").each(function (index, author) {
+		        authors.push($(author).text());
 		    });
 
-		    $("#playlist-panel .title").each(function (index, title) {
-		        playlist += $(title).text() + "\n";
+		    var titles = [];
+		    $("#playlist-panel .container .title").each(function (index, title) {
+		        titles.push($(title).text());
 		    });
 
-		    playlist += "\n";
+		    var playlist = [];
+
+		    var authorsAndTitles = zip([authors, titles]);
+		    for (var i = 0; i < authorsAndTitles.length; i++) {
+		        var author = authorsAndTitles[i][0];
+		        var title = authorsAndTitles[i][1];
+
+		        var playlistEntry = {
+		            "author": author,
+		            "title": title,
+		            "url": ""
+		        };
+
+		        playlist.push(playlistEntry);
+		    }
+
+		    var playlistJson = JSON.stringify({ playlist }, null, 4);
 
 		    $("body").append(`
 				<div id='scraped_playlists_window'>
 					<div id='scraped_playlists' style=''>
-                        <textarea name="scraped_playlists_textarea" rows="20" cols="50">` + playlist + `</textarea>
+                        <textarea name="scraped_playlists_textarea" rows="20" cols="50">` + playlistJson + `</textarea>
 					</div>
 					<style type='text/css'>
                         #scraped_playlists { display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(255,255,255); cursor: pointer; z-index: 900; }
-                        #scraped_playlists textarea { color: black; sans-serif; position: absolute; top: 10%; left: 10%; text-align: center; }
+                        #scraped_playlists textarea { color: black; sans-serif; position: absolute; top: 10%; left: 10%; }
 					</style>
 				</div>`
             );
