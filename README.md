@@ -10,4 +10,5 @@
 - Activate the playlist that you want to scrape.
 - Click the bookmarklet to run the code.
 - A textarea with the text (JSON) version of the active playlist should pop up.  Copy it to a safe place.
+- Refresh the page to continue using the site.
 - Repeat for each of your playlists.
